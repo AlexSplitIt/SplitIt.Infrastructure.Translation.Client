@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageId>SplitIt.Infrastructure.Translation.Client</PackageId>
+        <Authors>Splitit</Authors>
+        <Version>1.0.0</Version>
+        <Company>Splitit</Company>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <Deterministic>true</Deterministic>
+        <RepositoryUrl>https://github.com/Splitit/SplitIt.Infrastructure.Translation.Client.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.17" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.17" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="NSwag.MSBuild" Version="13.11.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Splitit.Infrastructure.IoC" Version="1.0.13" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Generated" />
+    </ItemGroup>
+
+    <Target Name="NSwag" BeforeTargets="BeforeBuild">
+        <Exec Command="$(NSwagExe_Core31) run nswag.json" />
+    </Target>
+</Project>
